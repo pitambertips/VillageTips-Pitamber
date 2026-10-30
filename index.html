@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VillageTips Pitamber - Explore Nature & Village Life</title>
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #81C784;
+            --bg-color: #f4f7f6;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin: 10px 0 0 0; font-size: 1.2rem; opacity: 0.9; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--primary);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+        }
+        .card ul { list-style-type: none; padding: 0; }
+        .card li { margin-bottom: 12px; }
+        .card a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+        .card a:hover { color: var(--primary); }
+        .card a::before {
+            content: "➤";
+            margin-right: 10px;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .btn-local {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white !important;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn-local:hover { background-color: #1b5e20; }
+        .btn-local::before { content: "" !important; margin: 0 !important; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary);
+            color: white;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌿 VillageTips Pitamber</h1>
+        <p>Explore the beauty of Nature, Agriculture, and Village Life</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Agriculture Card -->
+        <div class="card">
+            <h2>🌾 Agriculture (कृषि जानकारी)</h2>
+            <ul>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">मौरी पालन कसरी गर्ने?</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">रासायनिक मलको विकल्प</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">तरकारी खेतीका आधुनिक तरिका</a></li>
+            </ul>
+        </div>
+
+        <!-- Village & City Card -->
+        <div class="card">
+            <h2>🏡 Village & City (गाउँ र सहर)</h2>
+            <ul>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">नेपालका सुन्दर गाउँहरू</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">काठमाडौंका पर्यटकीय स्थल</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">गाउँले जीवनशैली</a></li>
+            </ul>
+        </div>
+
+        <!-- Nature & Wildlife Card -->
+        <div class="card">
+            <h2>🐅 Wildlife & Jungle (वन्यजन्तु)</h2>
+            <ul>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">चितवन राष्ट्रिय निकुञ्ज</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">एकसिङ्गे गैंडाको बारेमा</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">जङ्गल सफारी गाइड</a></li>
+            </ul>
+        </div>
+
+        <!-- River & Lake Card -->
+        <div class="card">
+            <h2>🌊 River & Lake (नदी र ताल)</h2>
+            <ul>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">फेवातालको सुन्दरता</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">कोशी नदीको महत्त्व</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">रारा ताल यात्रा</a></li>
+            </ul>
+        </div>
+
+        <!-- Kitchen Info Card -->
+        <div class="card">
+            <h2>🍲 Kitchen Info (भान्सा जानकारी)</h2>
+            <ul>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">परम्परागत नेपाली परिकार</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">घरेलु मसला बनाउने तरिका</a></li>
+                <li><a href="यहाँ_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्" target="_blank">स्वस्थकर खानेकुरा</a></li>
+            </ul>
+        </div>
+
+        <!-- GitHub Local Post Card -->
+        <div class="card">
+            <h2>📝 Special Posts (विशेष लेखहरू)</h2>
+            <p style="font-size: 0.9rem; color: var(--text-light);">यहाँ तपाईंले GitHub मै बनाएका पेजहरूको लिङ्क राख्न सक्नुहुन्छ।</p>
+            <!-- तपाईंले बनाउनुभएको post.html को लिङ्क -->
+            <a href="post.html" class="btn-local">मेरो नयाँ लेख पढ्नुहोस् (Local Post)</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 VillageTips Pitamber. All rights reserved.</p>
+    </footer>
+
+    <!-- तपाईंले भन्नुभएको स्क्रिप्ट यहाँ छ (Last ma) -->
+    <script>
+        // यो स्क्रिप्टले पेज लोड हुँदा सानो एनिमेसन देखाउँछ
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150); // एक पछि अर्को कार्ड देखिन्छ
+            });
+        });
+    </script>
+</body>
+</html>
