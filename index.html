@@ -27,8 +27,8 @@
     .logo-icon { font-size: 1.5rem; }
     .logo-text span { color: var(--green); }
     .nav-list { display: flex; gap: 4px; list-style: none; flex-wrap: wrap; }
-    .nav-list a { display: block; padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; transition: background 0.2s; }
-    .nav-list a:hover { background: var(--green-light); color: var(--green-dark); }
+    .nav-list a { display: block; padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; transition: background 0.2s, color 0.2s; cursor: pointer; }
+    .nav-list a:hover, .nav-list a.active { background: var(--green-light); color: var(--green-dark); font-weight: 700; }
     .menu-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 10px; font-size: 1.25rem; padding: 6px 11px; cursor: pointer; }
 
     /* Hero */
@@ -40,7 +40,9 @@
     .search-icon { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); font-size: 1.05rem; }
 
     /* Sections & Cards */
-    .category { padding: 46px 0 6px; scroll-margin-top: 84px; }
+    .category { padding: 46px 0 6px; scroll-margin-top: 84px; display: none; /* सुरुमा सबै लुकाइएको */ }
+    .category.active { display: block; /* क्लिक गरेको मात्र देखिने */ }
+    
     .category-head h2 { font-size: clamp(1.25rem, 3vw, 1.5rem); color: var(--green-dark); font-weight: 700; margin-bottom: 4px; }
     .category-desc { color: var(--muted); margin-bottom: 20px; max-width: 780px; font-size: 0.97rem; }
     
@@ -57,8 +59,7 @@
 
     /* Footer */
     .site-footer { margin-top: 56px; background: #14321b; color: #cfe3d1; padding: 34px 0; text-align: center; font-size: 0.92rem; }
-    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 12px; }
-    .site-footer a { color: #a5e0a8; text-decoration: none; }
+    .site-footer a { color: #a5e0a8; text-decoration: none; cursor: pointer; }
 
     @media (max-width: 900px) {
       .menu-toggle { display: block; }
@@ -71,20 +72,21 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">
+      <a href="#" class="logo" onclick="showCategory('all')">
         <span class="logo-icon">🌿</span>
         <span class="logo-text">Village<span>Tips</span></span>
       </a>
       <nav class="nav">
         <button class="menu-toggle" id="menuToggle">☰</button>
         <ul class="nav-list" id="navList">
-          <!-- मेनु अपडेट गरिएको छ -->
-          <li><a href="#krishi">कृषि जानकारी</a></li>
-          <li><a href="#travel">यात्रा र पर्यटन</a></li>
-          <li><a href="#wildlife">वन्यजन्तु र जंगल सफारी</a></li>
-          <li><a href="#river-lake">नदी र ताल</a></li>
-          <li><a href="#village-city">गाउँ र सहर</a></li>
-          <li><a href="#kitchen">भान्सा सुझाव</a></li>
+          <!-- नेभिगेसनमा 'all' र 'active' क्लास थपिएको छ -->
+          <li><a href="#" class="active" onclick="showCategory('all')">🏠 सबै</a></li>
+          <li><a href="#" onclick="showCategory('krishi')">कृषि जानकारी</a></li>
+          <li><a href="#" onclick="showCategory('travel')">यात्रा र पर्यटन</a></li>
+          <li><a href="#" onclick="showCategory('wildlife')">वन्यजन्तु र जंगल सफारी</a></li>
+          <li><a href="#" onclick="showCategory('river-lake')">नदी र ताल</a></li>
+          <li><a href="#" onclick="showCategory('village-city')">गाउँ र सहर</a></li>
+          <li><a href="#" onclick="showCategory('kitchen')">भान्सा सुझाव</a></li>
         </ul>
       </nav>
     </div>
@@ -151,12 +153,12 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-links">
-        <a href="#krishi">कृषि</a>
-        <a href="#travel">यात्रा</a>
-        <a href="#wildlife">वन्यजन्तु</a>
-        <a href="#river-lake">नदी र ताल</a>
-        <a href="#village-city">गाउँ र सहर</a>
-        <a href="#kitchen">भान्सा</a>
+        <a onclick="showCategory('krishi')">कृषि</a>
+        <a onclick="showCategory('travel')">यात्रा</a>
+        <a onclick="showCategory('wildlife')">वन्यजन्तु</a>
+        <a onclick="showCategory('river-lake')">नदी र ताल</a>
+        <a onclick="showCategory('village-city')">गाउँ र सहर</a>
+        <a onclick="showCategory('kitchen')">भान्सा</a>
       </div>
       <p>© <span id="year"></span> VillageTips — गाउँले ज्ञान र जानकारीको भण्डार।</p>
     </div>
@@ -168,92 +170,65 @@
     // =========================================================
     const siteData = [
       // --- कृषि जानकारी (Agriculture) ---
-      { 
-        category: "krishi", 
-        title: "मकै खेती", 
-        file: "makai-kheti.html", 
-        icon: "🌽", 
-        desc: "मकै रोप्ने समय, बीउ छनोट, मलजल र रोग नियन्त्रणको तरिका।", 
-        keywords: "makai maize corn kheti" 
-      },
-      { 
-        category: "krishi", 
-        title: "धान खेती", 
-        file: "dhan-kheti.html", 
-        icon: "🌾", 
-        desc: "रोपाइँ, सिँचाइ र धान बालीमा लाग्ने कीराको रोकथाम।", 
-        keywords: "dhan rice kheti" 
-      },
+      { category: "krishi", title: "मकै खेती", file: "makai-kheti.html", icon: "🌽", desc: "मकै रोप्ने समय, बीउ छनोट, मलजल र रोग नियन्त्रणको तरिका।", keywords: "makai maize corn kheti" },
+      { category: "krishi", title: "धान खेती", file: "dhan-kheti.html", icon: "🌾", desc: "रोपाइँ, सिँचाइ र धान बालीमा लाग्ने कीराको रोकथाम।", keywords: "dhan rice kheti" },
       
       // --- यात्रा र पर्यटन (Travel and Tour) ---
-      { 
-        category: "travel", 
-        title: "नुनथर क्षेत्र, रौतहट", 
-        file: "nunthar.html", 
-        icon: "🛕", 
-        desc: "रौतहटको प्रसिद्ध धार्मिक, ऐतिहासिक र पर्यटकीय स्थल नुनथरको जानकारी।", 
-        keywords: "nunthar rautahat travel tour mandir" 
-      },
-      { 
-        category: "travel", 
-        title: "पोखरा यात्रा", 
-        file: "pokhara-yatra.html", 
-        icon: "⛵", 
-        desc: "पोखरा घुम्ने स्थान, पुग्ने मार्ग र राम्रो समय।", 
-        keywords: "pokhara travel tour yatra" 
-      },
+      { category: "travel", title: "नुनथर पर्यटकीय र धार्मिक स्थल", file: "nunthar-tourist-and-religious-place.html", icon: "🛕", desc: "रौतहटको प्रसिद्ध धार्मिक, ऐतिहासिक र पर्यटकीय स्थल नुनथरको जानकारी।", keywords: "nunthar rautahat travel tour mandir" },
+      { category: "travel", title: "पोखरा यात्रा", file: "pokhara-yatra.html", icon: "⛵", desc: "पोखरा घुम्ने स्थान, पुग्ने मार्ग र राम्रो समय।", keywords: "pokhara travel tour yatra" },
 
       // --- वन्यजन्तु र जंगल सफारी (Wildlife and Jungle Safari) ---
-      { 
-        category: "wildlife", 
-        title: "बाघ", 
-        file: "bagh-jankari.html", 
-        icon: "🐅", 
-        desc: "बाघ संरक्षण, गणना र राष्ट्रिय निकुञ्जमा यसको भूमिका।", 
-        keywords: "bagh tiger wildlife jungle safari" 
-      },
-      { 
-        category: "wildlife", 
-        title: "हात्ती", 
-        file: "hatti-jankari.html", 
-        icon: "🐘", 
-        desc: "हात्तीको बासस्थान र मानव-हात्ती द्वन्द्व व्यवस्थापन।", 
-        keywords: "hatti elephant wildlife jungle safari" 
-      },
+      { category: "wildlife", title: "बाघ", file: "bagh-jankari.html", icon: "🐅", desc: "बाघ संरक्षण, गणना र राष्ट्रिय निकुञ्जमा यसको भूमिका।", keywords: "bagh tiger wildlife jungle safari" },
+      { category: "wildlife", title: "हात्ती", file: "hatti-jankari.html", icon: "🐘", desc: "हात्तीको बासस्थान र मानव-हात्ती द्वन्द्व व्यवस्थापन।", keywords: "hatti elephant wildlife jungle safari" },
 
       // --- नदी र ताल (Lake and River) ---
-      { 
-        category: "river-lake", 
-        title: "फेवा ताल", 
-        file: "phewa-tal.html", 
-        icon: "🛶", 
-        desc: "पोखराको प्रसिद्ध ताल, वरपरका पर्यटकीय गन्तव्य र गतिविधि।", 
-        keywords: "phewa lake pokhara tal" 
-      },
+      { category: "river-lake", title: "फेवा ताल", file: "phewa-tal.html", icon: "🛶", desc: "पोखराको प्रसिद्ध ताल, वरपरका पर्यटकीय गन्तव्य र गतिविधि।", keywords: "phewa lake pokhara tal" },
 
       // --- गाउँ र सहर (Village and City) ---
-      { 
-        category: "village-city", 
-        title: "गाउँको जीवनशैली", 
-        file: "gaun-jibanshaili.html", 
-        icon: "🌄", 
-        desc: "गाउँको रहनसहन, कृषि अर्थतन्त्र र सामुदायिक जीवन।", 
-        keywords: "gaun village lifestyle" 
-      },
+      { category: "village-city", title: "गाउँको जीवनशैली", file: "gaun-jibanshaili.html", icon: "🌄", desc: "गाउँको रहनसहन, कृषि अर्थतन्त्र र सामुदायिक जीवन।", keywords: "gaun village lifestyle" },
 
       // --- भान्सा सुझाव (Kitchen Tips) ---
-      { 
-        category: "kitchen", 
-        title: "मसला भण्डारण", 
-        file: "masala-bhandaran.html", 
-        icon: "🧂", 
-        desc: "मसला लामो समय ताजा र स्वादिलो राख्ने तरिका।", 
-        keywords: "masala spice storage kitchen" 
-      }
+      { category: "kitchen", title: "मसला भण्डारण", file: "masala-bhandaran.html", icon: "🧂", desc: "मसला लामो समय ताजा र स्वादिलो राख्ने तरिका।", keywords: "masala spice storage kitchen" }
     ];
 
     // =========================================================
-    // २. स्क्रिप्टले आफैंले कार्डहरू बनाउने कोड (यसलाई नछुनुहोस्)
+    // २. क्याटेगरी लुकाउने र देखाउने फंक्शन (Tab Logic)
+    // =========================================================
+    function showCategory(categoryId) {
+      // सबै सेक्सन लुकाउने
+      document.querySelectorAll('.category').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // मेनुको 'active' क्लास हटाउने
+      document.querySelectorAll('.nav-list a').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // यदि 'all' क्लिक गरेको छ भने सबै देखाउने
+      if (categoryId === 'all') {
+        document.querySelectorAll('.category').forEach(section => {
+          section.classList.add('active');
+        });
+        document.querySelector('.nav-list a').classList.add('active'); // 'सबै' बटनलाई एक्टिभ बनाउने
+      } else {
+        // क्लिक गरेको सेक्सन मात्र देखाउने
+        const targetSection = document.getElementById(categoryId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+      }
+
+      // सर्च बक्स खाली गर्ने (ताकि पुरानो सर्चले असर नगरोस्)
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('.card').forEach(c => c.style.display = '');
+      
+      // पेज माथि स्क्रोल गर्ने
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================
+    // ३. स्क्रिप्टले आफैंले कार्डहरू बनाउने कोड
     // =========================================================
     function renderCards() {
       document.querySelectorAll('.card-grid').forEach(grid => grid.innerHTML = '');
@@ -275,24 +250,31 @@
     }
 
     // =========================================================
-    // ३. सर्च र मेनुको कोड (यसलाई पनि नछुनुहोस्)
+    // ४. सर्च र मेनुको कोड
     // =========================================================
     document.addEventListener("DOMContentLoaded", () => {
       renderCards();
       document.getElementById('year').textContent = new Date().getFullYear();
+      
+      // सुरुमा सबै देखाउनको लागि
+      showCategory('all');
 
       const menuToggle = document.getElementById('menuToggle');
       const navList = document.getElementById('navList');
       menuToggle.addEventListener('click', () => navList.classList.toggle('open'));
-      navList.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => navList.classList.remove('open'));
-      });
 
+      // सर्च गर्दा सबै सेक्सन एक्टिभ गरेर सर्च गर्ने
       const searchInput = document.getElementById('searchInput');
       const noResult = document.getElementById('noResult');
 
       searchInput.addEventListener('input', () => {
         const query = searchInput.value.trim().toLowerCase();
+        
+        // सर्च गर्दा सबै सेक्सन एक्टिभ गर्ने
+        document.querySelectorAll('.category').forEach(section => {
+          section.classList.add('active');
+        });
+
         let totalVisible = 0;
 
         const cards = document.querySelectorAll('.card');
@@ -305,7 +287,11 @@
 
         document.querySelectorAll('.category').forEach(section => {
           const hasVisible = Array.from(section.querySelectorAll('.card')).some(c => c.style.display !== 'none');
-          section.style.display = hasVisible ? '' : 'none';
+          if (query !== '') {
+             section.style.display = hasVisible ? 'block' : 'none';
+          } else {
+             section.style.display = '';
+          }
         });
 
         noResult.style.display = totalVisible === 0 ? 'block' : 'none';
