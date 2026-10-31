@@ -1,150 +1,316 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VillageTips Pitamber</title>
-    <style>
-        /* GamingTech जस्तै डार्क थिम डिजाइन */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background-color: #2d2d2d;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
-        h2 {
-            color: #f39c12; /* सुनौलो रङ */
-            margin-top: 30px;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 10px;
-        }
-        p.subtitle {
-            text-align: center;
-            color: #cccccc;
-            font-size: 18px;
-        }
-        
-        /* मुख्य बटनको डिजाइन (post.html को लागि) */
-        .main-btn {
-            display: block;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 30px;
-            transition: 0.3s;
-        }
-        .main-btn:hover {
-            background-color: #388E3C;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VillageTips — गाउँले ज्ञान र जानकारीको भण्डार</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* ===================== CSS ===================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --green: #2e7d32; --green-dark: #1b5e20; --green-light: #e8f5e9;
+      --bg: #f7f9f5; --card: #ffffff; --text: #1f2d26; --muted: #5d6f65;
+      --border: #e3e9df; --radius: 14px; --shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 10px 24px rgba(46, 125, 50, 0.18);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Mukta', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { width: min(1120px, 92%); margin-inline: auto; }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background: #3a3a3a;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        li:hover {
-            background: #4CAF50;
-        }
-        a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 18px;
-            display: block;
-        }
-        .category {
-            font-size: 14px;
-            color: #bdc3c7;
-            margin-bottom: 5px;
-            display: block;
-        }
-    </style>
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 1.25rem; color: var(--green-dark); }
+    .logo-icon { font-size: 1.5rem; }
+    .logo-text span { color: var(--green); }
+    .nav-list { display: flex; gap: 4px; list-style: none; flex-wrap: wrap; }
+    .nav-list a { display: block; padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; transition: background 0.2s; }
+    .nav-list a:hover { background: var(--green-light); color: var(--green-dark); }
+    .menu-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 10px; font-size: 1.25rem; padding: 6px 11px; cursor: pointer; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: #ffffff; padding: 56px 0 52px; text-align: center; }
+    .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 12px; font-weight: 700; }
+    .hero p { max-width: 680px; margin: 0 auto 26px; opacity: 0.93; font-size: 1.02rem; }
+    .search-box { max-width: 520px; margin-inline: auto; position: relative; }
+    .search-box input { width: 100%; padding: 14px 18px 14px 46px; border-radius: 999px; border: none; font-size: 1rem; outline: none; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18); color: var(--text); }
+    .search-icon { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); font-size: 1.05rem; }
+
+    /* Sections & Cards */
+    .category { padding: 46px 0 6px; scroll-margin-top: 84px; }
+    .category-head h2 { font-size: clamp(1.25rem, 3vw, 1.5rem); color: var(--green-dark); font-weight: 700; margin-bottom: 4px; }
+    .category-desc { color: var(--muted); margin-bottom: 20px; max-width: 780px; font-size: 0.97rem; }
+    
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; text-decoration: none; color: inherit; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; transition: transform 0.18s, box-shadow 0.18s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: #bfe0c1; }
+    .card-icon { font-size: 1.6rem; line-height: 1; }
+    .card h3 { font-size: 1.08rem; color: var(--green-dark); font-weight: 600; }
+    .card p { font-size: 0.92rem; color: var(--muted); }
+    .card-more { margin-top: auto; padding-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--green); }
+
+    .no-result { display: none; text-align: center; padding: 40px 0; color: var(--muted); font-size: 1.05rem; }
+
+    /* Footer */
+    .site-footer { margin-top: 56px; background: #14321b; color: #cfe3d1; padding: 34px 0; text-align: center; font-size: 0.92rem; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 12px; }
+    .site-footer a { color: #a5e0a8; text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .menu-toggle { display: block; }
+      .nav-list { display: none; position: absolute; top: 100%; right: 0; min-width: 220px; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-hover); flex-direction: column; padding: 8px; }
+      .nav-list.open { display: flex; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🌿 VillageTips Pitamber</h1>
-        <p class="subtitle">नेपालको गाउँ, कृषि र प्रकृतिको जानकारी</p>
-
-        <!-- यो बटनले सिधै post.html पेज खोल्छ -->
-        <a href="post.html" class="main-btn">📚 सबै ब्लग पोस्टहरू हेर्नुहोस् (View All Posts)</a>
-
-        <!-- कृषि सम्बन्धी पोस्टहरू -->
-        <h2>🌾 Agriculture (कृषि)</h2>
-        <ul>
-            <li>
-                <span class="category">Agriculture</span>
-                <a href="यहाँ_धान_भण्डारण_को_लिङ्क_राख्नुहोस्" target="_blank">धान भण्डारण गर्ने तरिका</a>
-            </li>
-            <li>
-                <span class="category">Agriculture</span>
-                <a href="यहाँ_Raya_Saag_को_लिङ्क_राख्नुहोस्" target="_blank">Cultivation Practices of Raya Saag</a>
-            </li>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">Village<span>Tips</span></span>
+      </a>
+      <nav class="nav">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="nav-list" id="navList">
+          <!-- मेनु अपडेट गरिएको छ -->
+          <li><a href="#krishi">कृषि जानकारी</a></li>
+          <li><a href="#travel">यात्रा र पर्यटन</a></li>
+          <li><a href="#wildlife">वन्यजन्तु र जंगल सफारी</a></li>
+          <li><a href="#river-lake">नदी र ताल</a></li>
+          <li><a href="#village-city">गाउँ र सहर</a></li>
+          <li><a href="#kitchen">भान्सा सुझाव</a></li>
         </ul>
-
-        <!-- वन्यजन्तु र जडीबुटी सम्बन्धी पोस्टहरू -->
-        <h2>🐅 Wildlife & Herbs (वन्यजन्तु र जडीबुटी)</h2>
-        <ul>
-            <li>
-                <span class="category">Wildlife</span>
-                <a href="यहाँ_Cricket_को_लिङ्क_राख्नुहोस्" target="_blank">Black Field Cricket वा कीरो किरा</a>
-            </li>
-            <li>
-                <span class="category">Herbs</span>
-                <a href="यहाँ_भुइराज_को_लिङ्क_राख्नुहोस्" target="_blank">भूँईराज झार कपाल कालो बनाउने जडीबुटी</a>
-            </li>
-        </ul>
-
-        <!-- चाडपर्व सम्बन्धी पोस्टहरू -->
-        <h2>🪔 Festival (चाडपर्व)</h2>
-        <ul>
-            <li>
-                <span class="category">Festival</span>
-                <a href="यहाँ_दसैं_को_लिङ्क_राख्नुहोस्" target="_blank">नेपालको महान् चाड दसैँ: फूलपातीदेखि विजया दशमीसम्मको महत्त्व र परम्परा।</a>
-            </li>
-        </ul>
-
-        <!-- अन्य श्रेणीहरू (तपाईंले पछि पोस्ट थप्दै जानुहोला) -->
-        <h2>🏡 Village & City (गाउँ र सहर)</h2>
-        <ul>
-            <li>
-                <span class="category">Village</span>
-                <a href="post.html">गाउँले जीवनका पोस्टहरू हेर्नुहोस्</a>
-            </li>
-        </ul>
-        
-        <h2>🍲 Kitchen Info (भान्सा जानकारी)</h2>
-        <ul>
-            <li>
-                <span class="category">Kitchen</span>
-                <a href="post.html">भान्सा सम्बन्धी पोस्टहरू हेर्नुहोस्</a>
-            </li>
-        </ul>
-
+      </nav>
     </div>
+  </header>
 
+  <section class="hero">
+    <div class="container">
+      <h1>गाउँले ज्ञान, जीवनको सहयोग</h1>
+      <p>कृषि, यात्रा, वन्यजन्तु, नदी र ताल, गाउँ–सहर र भान्सा सम्बन्धी उपयोगी जानकारी एकै ठाउँमा।</p>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="जानकारी खोज्नुहोस्... (जस्तै: मकै, नुनथर, बाघ)" autocomplete="off" />
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    
+    <!-- ============ 1. कृषि जानकारी ============ -->
+    <section class="category" id="krishi">
+      <div class="category-head"><h2>🌾 कृषि जानकारी (Agriculture)</h2></div>
+      <p class="category-desc">खेतीपाती, बाली व्यवस्थापन, पशुपालन र कृषि प्रविधि सम्बन्धी जानकारी।</p>
+      <div class="card-grid" id="grid-krishi"></div>
+    </section>
+
+    <!-- ============ 2. यात्रा र पर्यटन ============ -->
+    <section class="category" id="travel">
+      <div class="category-head"><h2>🧭 यात्रा र पर्यटन (Travel and Tour)</h2></div>
+      <p class="category-desc">नेपालका पर्यटकीय गन्तव्य, यात्रा मार्ग, तयारी र घुम्न जाने सुझाव।</p>
+      <div class="card-grid" id="grid-travel"></div>
+    </section>
+
+    <!-- ============ 3. वन्यजन्तु र जंगल सफारी ============ -->
+    <section class="category" id="wildlife">
+      <div class="category-head"><h2>🐘 वन्यजन्तु र जंगल सफारी (Wildlife and Jungle Safari)</h2></div>
+      <p class="category-desc">नेपालका वन्यजन्तु, तिनको बासस्थान, जंगल सफारी र संरक्षण सम्बन्धी जानकारी।</p>
+      <div class="card-grid" id="grid-wildlife"></div>
+    </section>
+
+    <!-- ============ 4. नदी र ताल ============ -->
+    <section class="category" id="river-lake">
+      <div class="category-head"><h2>🏞️ नदी र ताल (Lake and River)</h2></div>
+      <p class="category-desc">नेपालका प्रमुख नदी, ताल, तिनको महत्व र संरक्षण सम्बन्धी जानकारी।</p>
+      <div class="card-grid" id="grid-river-lake"></div>
+    </section>
+
+    <!-- ============ 5. गाउँ र सहर ============ -->
+    <section class="category" id="village-city">
+      <div class="category-head"><h2>🏘️ गाउँ र सहर (Village and City)</h2></div>
+      <p class="category-desc">गाउँ र सहरको जीवनशैली, रहनसहन, रोजगारी र तिनको तुलना सम्बन्धी जानकारी।</p>
+      <div class="card-grid" id="grid-village-city"></div>
+    </section>
+
+    <!-- ============ 6. भान्सा सुझाव ============ -->
+    <section class="category" id="kitchen">
+      <div class="category-head"><h2>🍳 भान्सा सुझाव (Kitchen Tips)</h2></div>
+      <p class="category-desc">खाना पकाउने, खाद्य सामग्री भण्डारण गर्ने र भान्सा व्यवस्थापनका सजिला उपाय।</p>
+      <div class="card-grid" id="grid-kitchen"></div>
+    </section>
+
+    <p class="no-result" id="noResult">😔 कुनै जानकारी भेटिएन। कृपया अर्को शब्दले खोज्नुहोस्।</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#krishi">कृषि</a>
+        <a href="#travel">यात्रा</a>
+        <a href="#wildlife">वन्यजन्तु</a>
+        <a href="#river-lake">नदी र ताल</a>
+        <a href="#village-city">गाउँ र सहर</a>
+        <a href="#kitchen">भान्सा</a>
+      </div>
+      <p>© <span id="year"></span> VillageTips — गाउँले ज्ञान र जानकारीको भण्डार।</p>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================
+    // १. तपाईंले यहाँ आफ्ना सबै फाइलहरूको जानकारी राख्ने
+    // =========================================================
+    const siteData = [
+      // --- कृषि जानकारी (Agriculture) ---
+      { 
+        category: "krishi", 
+        title: "मकै खेती", 
+        file: "makai-kheti.html", 
+        icon: "🌽", 
+        desc: "मकै रोप्ने समय, बीउ छनोट, मलजल र रोग नियन्त्रणको तरिका।", 
+        keywords: "makai maize corn kheti" 
+      },
+      { 
+        category: "krishi", 
+        title: "धान खेती", 
+        file: "dhan-kheti.html", 
+        icon: "🌾", 
+        desc: "रोपाइँ, सिँचाइ र धान बालीमा लाग्ने कीराको रोकथाम।", 
+        keywords: "dhan rice kheti" 
+      },
+      
+      // --- यात्रा र पर्यटन (Travel and Tour) ---
+      { 
+        category: "travel", 
+        title: "नुनथर क्षेत्र, रौतहट", 
+        file: "nunthar.html", 
+        icon: "🛕", 
+        desc: "रौतहटको प्रसिद्ध धार्मिक, ऐतिहासिक र पर्यटकीय स्थल नुनथरको जानकारी।", 
+        keywords: "nunthar rautahat travel tour mandir" 
+      },
+      { 
+        category: "travel", 
+        title: "पोखरा यात्रा", 
+        file: "pokhara-yatra.html", 
+        icon: "⛵", 
+        desc: "पोखरा घुम्ने स्थान, पुग्ने मार्ग र राम्रो समय।", 
+        keywords: "pokhara travel tour yatra" 
+      },
+
+      // --- वन्यजन्तु र जंगल सफारी (Wildlife and Jungle Safari) ---
+      { 
+        category: "wildlife", 
+        title: "बाघ", 
+        file: "bagh-jankari.html", 
+        icon: "🐅", 
+        desc: "बाघ संरक्षण, गणना र राष्ट्रिय निकुञ्जमा यसको भूमिका।", 
+        keywords: "bagh tiger wildlife jungle safari" 
+      },
+      { 
+        category: "wildlife", 
+        title: "हात्ती", 
+        file: "hatti-jankari.html", 
+        icon: "🐘", 
+        desc: "हात्तीको बासस्थान र मानव-हात्ती द्वन्द्व व्यवस्थापन।", 
+        keywords: "hatti elephant wildlife jungle safari" 
+      },
+
+      // --- नदी र ताल (Lake and River) ---
+      { 
+        category: "river-lake", 
+        title: "फेवा ताल", 
+        file: "phewa-tal.html", 
+        icon: "🛶", 
+        desc: "पोखराको प्रसिद्ध ताल, वरपरका पर्यटकीय गन्तव्य र गतिविधि।", 
+        keywords: "phewa lake pokhara tal" 
+      },
+
+      // --- गाउँ र सहर (Village and City) ---
+      { 
+        category: "village-city", 
+        title: "गाउँको जीवनशैली", 
+        file: "gaun-jibanshaili.html", 
+        icon: "🌄", 
+        desc: "गाउँको रहनसहन, कृषि अर्थतन्त्र र सामुदायिक जीवन।", 
+        keywords: "gaun village lifestyle" 
+      },
+
+      // --- भान्सा सुझाव (Kitchen Tips) ---
+      { 
+        category: "kitchen", 
+        title: "मसला भण्डारण", 
+        file: "masala-bhandaran.html", 
+        icon: "🧂", 
+        desc: "मसला लामो समय ताजा र स्वादिलो राख्ने तरिका।", 
+        keywords: "masala spice storage kitchen" 
+      }
+    ];
+
+    // =========================================================
+    // २. स्क्रिप्टले आफैंले कार्डहरू बनाउने कोड (यसलाई नछुनुहोस्)
+    // =========================================================
+    function renderCards() {
+      document.querySelectorAll('.card-grid').forEach(grid => grid.innerHTML = '');
+
+      siteData.forEach(item => {
+        const grid = document.getElementById(`grid-${item.category}`);
+        if (grid) {
+          const cardHTML = `
+            <a class="card" href="${item.file}" data-search="${item.title} ${item.desc} ${item.keywords}">
+              <span class="card-icon">${item.icon}</span>
+              <h3>${item.title}</h3>
+              <p>${item.desc}</p>
+              <span class="card-more">पूरा पढ्नुहोस् →</span>
+            </a>
+          `;
+          grid.innerHTML += cardHTML;
+        }
+      });
+    }
+
+    // =========================================================
+    // ३. सर्च र मेनुको कोड (यसलाई पनि नछुनुहोस्)
+    // =========================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCards();
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const menuToggle = document.getElementById('menuToggle');
+      const navList = document.getElementById('navList');
+      menuToggle.addEventListener('click', () => navList.classList.toggle('open'));
+      navList.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navList.classList.remove('open'));
+      });
+
+      const searchInput = document.getElementById('searchInput');
+      const noResult = document.getElementById('noResult');
+
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let totalVisible = 0;
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+          const haystack = (card.dataset.search || '').toLowerCase();
+          const matches = haystack.includes(query);
+          card.style.display = matches ? '' : 'none';
+          if (matches) totalVisible++;
+        });
+
+        document.querySelectorAll('.category').forEach(section => {
+          const hasVisible = Array.from(section.querySelectorAll('.card')).some(c => c.style.display !== 'none');
+          section.style.display = hasVisible ? '' : 'none';
+        });
+
+        noResult.style.display = totalVisible === 0 ? 'block' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
