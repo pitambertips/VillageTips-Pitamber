@@ -39,13 +39,13 @@
     .category { padding: 10px 0; border-bottom: 1px solid var(--border); }
     .category:last-child { border-bottom: none; }
     
-    /* हेडिङ र एरोको डिजाइन */
+    /* हेडिङ र एरोको डिजाइन (क्लिक गर्न मिल्ने) */
     .category-head { 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
       cursor: pointer; 
-      padding: 15px 10px; 
+      padding: 15px 20px; 
       background: #ffffff;
       border-radius: 10px;
       margin-top: 10px;
@@ -55,17 +55,17 @@
     .category-head:hover { background: var(--green-light); }
     .category-head h2 { font-size: clamp(1.15rem, 3vw, 1.35rem); color: var(--green-dark); font-weight: 700; margin: 0; }
     
-    /* एरो आइकन */
+    /* दायाँतिरको एरो आइकन */
     .arrow-icon { 
       font-size: 1.2rem; 
       color: var(--green); 
       transition: transform 0.3s ease; 
     }
     .arrow-icon.open { 
-      transform: rotate(180deg);
+      transform: rotate(180deg); /* क्लिक गर्दा एरो घुम्ने */
     }
 
-    /* क्याटेगरी भित्रको कन्टेन्ट */
+    /* क्याटेगरी भित्रको कन्टेन्ट (सुरुमा सबै लुकेको) */
     .category-body { 
       display: none; 
       padding: 15px 5px 20px; 
@@ -97,7 +97,7 @@
 
     /* मोबाइलको लागि थप CSS */
     @media (max-width: 600px) {
-      .category-head { padding: 12px 10px; }
+      .category-head { padding: 12px 15px; }
       .category-head h2 { font-size: 1.1rem; }
       .card-grid { grid-template-columns: 1fr; }
     }
@@ -201,7 +201,7 @@
       </div>
     </section>
 
-    <!-- ============ ७. चाडपर्व (Festival) - नयाँ थपिएको ============ -->
+    <!-- ============ ७. चाडपर्व (Festival) ============ -->
     <section class="category" id="festival">
       <div class="category-head" onclick="toggleAccordion('festival')">
         <h2>🎉 चाडपर्व (Festival)</h2>
@@ -225,7 +225,7 @@
 
   <!-- ===================== JAVASCRIPT ===================== -->
   <script>
-    // १. ब्लग डेटा (यहाँ तपाईंको सबै फाइलहरूको जानकारी छ)
+    // १. ब्लग डेटा
     const blogData = [
       // --- चाडपर्व (Festival) ---
       { category: "festival", title: "गोरु तिहार", file: "goru-tihar.html", icon: "🐂", desc: "खेत जोत्ने गोरु र हली (किसान) को पूजा गरिने दिन, इतिहास र मनाउने तरिका।", keywords: "goru tihar ox festival hali govardhan puja nepal" },
@@ -248,7 +248,6 @@
       { category: "kitchen", title: "मसला भण्डारण", file: "masala-bhandaran.html", icon: "🧂", desc: "मसला लामो समय ताजा र स्वादिलो राख्ने तरिका।", keywords: "masala spice storage kitchen" },
       
       // --- गाउँ र सहर (Village and City) ---
-      // नयाँ थपिएको: तपाईंको अघिल्लो कुराकानी अनुसार एउटा नमुना पोस्ट राखिएको छ, ताकि यो क्याटेगरी देखियोस्।
       { category: "village-city", title: "चाबहिल स्तुपा", file: "chabahil-stupa.html", icon: "🏛️", desc: "काठमाडौंको चाबहिलमा रहेको ऐतिहासिक चारुमती स्तुपाको जानकारी।", keywords: "chabahil stupa kathmandu charumati" }
     ];
 
@@ -271,7 +270,7 @@
         }
       });
 
-      // जुन क्याटेगरीमा एउटै पोस्ट छैन, त्यो हेडिङ पूरै लुकाउने
+      // खाली क्याटेगरी लुकाउने
       document.querySelectorAll('.category').forEach(section => {
         const grid = section.querySelector('.card-grid');
         if (grid && grid.children.length === 0) {
@@ -282,17 +281,20 @@
       });
     }
 
-    // ३. एकोर्डियन (Accordion) खोल्ने र बन्द गर्ने फंक्शन
+    // ३. एकोर्डियन (Accordion) खोल्ने र बन्द गर्ने स्मार्ट फंक्शन
     function toggleAccordion(categoryId) {
-      const body = document.getElementById(`body-${categoryId}`);
-      const arrow = document.getElementById(`arrow-${categoryId}`);
-      
-      if (body.classList.contains('active')) {
-        body.classList.remove('active');
-        arrow.classList.remove('open');
-      } else {
-        body.classList.add('active');
-        arrow.classList.add('open');
+      const targetBody = document.getElementById(`body-${categoryId}`);
+      const targetArrow = document.getElementById(`arrow-${categoryId}`);
+      const isCurrentlyActive = targetBody.classList.contains('active');
+
+      // पहिले सबै क्याटेगरी बन्द गर्ने र सबै एरो सिधा पार्ने
+      document.querySelectorAll('.category-body').forEach(body => body.classList.remove('active'));
+      document.querySelectorAll('.arrow-icon').forEach(arrow => arrow.classList.remove('open'));
+
+      // यदि क्लिक गरेको क्याटेगरी पहिले खुला थिएन भने मात्र खोल्ने
+      if (!isCurrentlyActive) {
+        targetBody.classList.add('active');
+        targetArrow.classList.add('open');
       }
     }
 
@@ -330,6 +332,7 @@
                section.style.display = 'none';
              }
           } else {
+             // सर्च खाली भए सबै पुरानै अवस्थामा (बन्द) ल्याउने
              section.style.display = 'block';
              body.classList.remove('active');
              arrow.classList.remove('open');
