@@ -22,30 +22,64 @@
 
     /* Header */
     .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
+    .header-inner { display: flex; align-items: center; justify-content: center; padding: 12px 0; }
     .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 1.25rem; color: var(--green-dark); }
     .logo-icon { font-size: 1.5rem; }
     .logo-text span { color: var(--green); }
-    .nav-list { display: flex; gap: 4px; list-style: none; flex-wrap: wrap; }
-    .nav-list a { display: block; padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; transition: background 0.2s, color 0.2s; cursor: pointer; }
-    .nav-list a:hover, .nav-list a.active { background: var(--green-light); color: var(--green-dark); font-weight: 700; }
-    .menu-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 10px; font-size: 1.25rem; padding: 6px 11px; cursor: pointer; }
 
     /* Hero */
-    .hero { background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: #ffffff; padding: 56px 0 52px; text-align: center; }
+    .hero { background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: #ffffff; padding: 50px 0 40px; text-align: center; }
     .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 12px; font-weight: 700; }
     .hero p { max-width: 680px; margin: 0 auto 26px; opacity: 0.93; font-size: 1.02rem; }
     .search-box { max-width: 520px; margin-inline: auto; position: relative; }
     .search-box input { width: 100%; padding: 14px 18px 14px 46px; border-radius: 999px; border: none; font-size: 1rem; outline: none; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18); color: var(--text); }
     .search-icon { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); font-size: 1.05rem; }
 
-    /* Sections & Cards */
-    .category { padding: 46px 0 6px; scroll-margin-top: 84px; display: none; /* सुरुमा सबै लुकाइएको */ }
-    .category.active { display: block; /* क्लिक गरेको मात्र देखिने */ }
+    /* Accordion Sections */
+    .category { padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .category:last-child { border-bottom: none; }
     
-    .category-head h2 { font-size: clamp(1.25rem, 3vw, 1.5rem); color: var(--green-dark); font-weight: 700; margin-bottom: 4px; }
-    .category-desc { color: var(--muted); margin-bottom: 20px; max-width: 780px; font-size: 0.97rem; }
+    /* हेडिङ र एरोको डिजाइन */
+    .category-head { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      cursor: pointer; 
+      padding: 15px 10px; 
+      background: #ffffff;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: var(--shadow);
+      transition: background 0.2s;
+    }
+    .category-head:hover { background: var(--green-light); }
+    .category-head h2 { font-size: clamp(1.15rem, 3vw, 1.35rem); color: var(--green-dark); font-weight: 700; margin: 0; }
     
+    /* एरो आइकन */
+    .arrow-icon { 
+      font-size: 1.2rem; 
+      color: var(--green); 
+      transition: transform 0.3s ease; 
+    }
+    .arrow-icon.open { 
+      transform: rotate(180deg);
+    }
+
+    /* क्याटेगरी भित्रको कन्टेन्ट */
+    .category-body { 
+      display: none; 
+      padding: 15px 5px 20px; 
+    }
+    .category-body.active { 
+      display: block; 
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .category-desc { color: var(--muted); margin-bottom: 20px; font-size: 0.97rem; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
     
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; text-decoration: none; color: inherit; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; transition: transform 0.18s, box-shadow 0.18s; }
@@ -58,186 +92,171 @@
     .no-result { display: none; text-align: center; padding: 40px 0; color: var(--muted); font-size: 1.05rem; }
 
     /* Footer */
-    .site-footer { margin-top: 56px; background: #14321b; color: #cfe3d1; padding: 34px 0; text-align: center; font-size: 0.92rem; }
+    .site-footer { margin-top: 40px; background: #14321b; color: #cfe3d1; padding: 34px 0; text-align: center; font-size: 0.92rem; }
     .site-footer a { color: #a5e0a8; text-decoration: none; cursor: pointer; }
 
-    @media (max-width: 900px) {
-      .menu-toggle { display: block; }
-      .nav-list { display: none; position: absolute; top: 100%; right: 0; min-width: 220px; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-hover); flex-direction: column; padding: 8px; }
-      .nav-list.open { display: flex; }
+    /* मोबाइलको लागि थप CSS */
+    @media (max-width: 600px) {
+      .category-head { padding: 12px 10px; }
+      .category-head h2 { font-size: 1.1rem; }
+      .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- हेडर -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#" class="logo" onclick="showCategory('all')">
+      <a href="index.html" class="logo">
         <span class="logo-icon">🌿</span>
         <span class="logo-text">Village<span>Tips</span></span>
       </a>
-      <nav class="nav">
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <ul class="nav-list" id="navList">
-          <!-- नेभिगेसनमा 'all' र 'active' क्लास थपिएको छ -->
-          <li><a href="#" class="active" onclick="showCategory('all')">🏠 सबै</a></li>
-          <li><a href="#" onclick="showCategory('krishi')">कृषि जानकारी</a></li>
-          <li><a href="#" onclick="showCategory('travel')">यात्रा र पर्यटन</a></li>
-          <li><a href="#" onclick="showCategory('wildlife')">वन्यजन्तु र जंगल सफारी</a></li>
-          <li><a href="#" onclick="showCategory('river-lake')">नदी र ताल</a></li>
-          <li><a href="#" onclick="showCategory('village-city')">गाउँ र सहर</a></li>
-          <li><a href="#" onclick="showCategory('kitchen')">भान्सा सुझाव</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
+  <!-- हिरो र सर्च -->
   <section class="hero">
     <div class="container">
       <h1>गाउँले ज्ञान, जीवनको सहयोग</h1>
-      <p>कृषि, यात्रा, वन्यजन्तु, नदी र ताल, गाउँ–सहर र भान्सा सम्बन्धी उपयोगी जानकारी एकै ठाउँमा।</p>
+      <p>कृषि, यात्रा, वन्यजन्तु, नदी र ताल, गाउँ–सहर, भान्सा र चाडपर्व सम्बन्धी उपयोगी जानकारी एकै ठाउँमा।</p>
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="जानकारी खोज्नुहोस्... (जस्तै: मकै, नुनथर, बाघ)" autocomplete="off" />
+        <input type="text" id="searchInput" placeholder="जानकारी खोज्नुहोस्... (जस्तै: मकै, नुनथर, तिहार)" autocomplete="off" />
       </div>
     </div>
   </section>
 
   <main class="container">
     
-    <!-- ============ 1. कृषि जानकारी ============ -->
+    <!-- ============ १. कृषि जानकारी ============ -->
     <section class="category" id="krishi">
-      <div class="category-head"><h2>🌾 कृषि जानकारी (Agriculture)</h2></div>
-      <p class="category-desc">खेतीपाती, बाली व्यवस्थापन, पशुपालन र कृषि प्रविधि सम्बन्धी जानकारी।</p>
-      <div class="card-grid" id="grid-krishi"></div>
+      <div class="category-head" onclick="toggleAccordion('krishi')">
+        <h2>🌾 कृषि जानकारी (Agriculture)</h2>
+        <span class="arrow-icon" id="arrow-krishi">▼</span>
+      </div>
+      <div class="category-body" id="body-krishi">
+        <p class="category-desc">खेतीपाती, बाली व्यवस्थापन, पशुपालन र कृषि प्रविधि सम्बन्धी जानकारी।</p>
+        <div class="card-grid" id="grid-krishi"></div>
+      </div>
     </section>
 
-    <!-- ============ 2. यात्रा र पर्यटन ============ -->
+    <!-- ============ २. यात्रा र पर्यटन ============ -->
     <section class="category" id="travel">
-      <div class="category-head"><h2>🧭 यात्रा र पर्यटन (Travel and Tour)</h2></div>
-      <p class="category-desc">नेपालका पर्यटकीय गन्तव्य, यात्रा मार्ग, तयारी र घुम्न जाने सुझाव।</p>
-      <div class="card-grid" id="grid-travel"></div>
+      <div class="category-head" onclick="toggleAccordion('travel')">
+        <h2>🧭 यात्रा र पर्यटन (Travel and Tour)</h2>
+        <span class="arrow-icon" id="arrow-travel">▼</span>
+      </div>
+      <div class="category-body" id="body-travel">
+        <p class="category-desc">नेपालका पर्यटकीय गन्तव्य, यात्रा मार्ग, तयारी र घुम्न जाने सुझाव।</p>
+        <div class="card-grid" id="grid-travel"></div>
+      </div>
     </section>
 
-    <!-- ============ 3. वन्यजन्तु र जंगल सफारी ============ -->
+    <!-- ============ ३. वन्यजन्तु र जंगल सफारी ============ -->
     <section class="category" id="wildlife">
-      <div class="category-head"><h2>🐘 वन्यजन्तु र जंगल सफारी (Wildlife and Jungle Safari)</h2></div>
-      <p class="category-desc">नेपालका वन्यजन्तु, तिनको बासस्थान, जंगल सफारी र संरक्षण सम्बन्धी जानकारी।</p>
-      <div class="card-grid" id="grid-wildlife"></div>
+      <div class="category-head" onclick="toggleAccordion('wildlife')">
+        <h2>🐘 वन्यजन्तु र जंगल सफारी (Wildlife)</h2>
+        <span class="arrow-icon" id="arrow-wildlife">▼</span>
+      </div>
+      <div class="category-body" id="body-wildlife">
+        <p class="category-desc">नेपालका वन्यजन्तु, तिनको बासस्थान, जंगल सफारी र संरक्षण सम्बन्धी जानकारी।</p>
+        <div class="card-grid" id="grid-wildlife"></div>
+      </div>
     </section>
 
-    <!-- ============ 4. नदी र ताल ============ -->
+    <!-- ============ ४. नदी र ताल ============ -->
     <section class="category" id="river-lake">
-      <div class="category-head"><h2>🏞️ नदी र ताल (Lake and River)</h2></div>
-      <p class="category-desc">नेपालका प्रमुख नदी, ताल, तिनको महत्व र संरक्षण सम्बन्धी जानकारी।</p>
-      <div class="card-grid" id="grid-river-lake"></div>
+      <div class="category-head" onclick="toggleAccordion('river-lake')">
+        <h2>🏞️ नदी र ताल (Lake and River)</h2>
+        <span class="arrow-icon" id="arrow-river-lake">▼</span>
+      </div>
+      <div class="category-body" id="body-river-lake">
+        <p class="category-desc">नेपालका प्रमुख नदी, ताल, तिनको महत्व र संरक्षण सम्बन्धी जानकारी।</p>
+        <div class="card-grid" id="grid-river-lake"></div>
+      </div>
     </section>
 
-    <!-- ============ 5. गाउँ र सहर ============ -->
+    <!-- ============ ५. गाउँ र सहर ============ -->
     <section class="category" id="village-city">
-      <div class="category-head"><h2>🏘️ गाउँ र सहर (Village and City)</h2></div>
-      <p class="category-desc">गाउँ र सहरको जीवनशैली, रहनसहन, रोजगारी र तिनको तुलना सम्बन्धी जानकारी।</p>
-      <div class="card-grid" id="grid-village-city"></div>
+      <div class="category-head" onclick="toggleAccordion('village-city')">
+        <h2>🏡 गाउँ र सहर (Village and City)</h2>
+        <span class="arrow-icon" id="arrow-village-city">▼</span>
+      </div>
+      <div class="category-body" id="body-village-city">
+        <p class="category-desc">नेपालका विभिन्न गाउँ, ऐतिहासिक सहर, स्थानीय संस्कृति र परम्परा सम्बन्धी जानकारी।</p>
+        <div class="card-grid" id="grid-village-city"></div>
+      </div>
     </section>
 
-    <!-- ============ 6. भान्सा सुझाव ============ -->
+    <!-- ============ ६. भान्सा सुझाव ============ -->
     <section class="category" id="kitchen">
-      <div class="category-head"><h2>🍳 भान्सा सुझाव (Kitchen Tips)</h2></div>
-      <p class="category-desc">खाना पकाउने, खाद्य सामग्री भण्डारण गर्ने र भान्सा व्यवस्थापनका सजिला उपाय।</p>
-      <div class="card-grid" id="grid-kitchen"></div>
+      <div class="category-head" onclick="toggleAccordion('kitchen')">
+        <h2>🍳 भान्सा सुझाव (Kitchen Tips)</h2>
+        <span class="arrow-icon" id="arrow-kitchen">▼</span>
+      </div>
+      <div class="category-body" id="body-kitchen">
+        <p class="category-desc">स्वस्थ र स्वादिष्ट खाना पकाउने काइदा, भान्सा सरसफाइ र परम्परागत नेपाली परिकार सम्बन्धी सुझाव।</p>
+        <div class="card-grid" id="grid-kitchen"></div>
+      </div>
     </section>
 
-    <p class="no-result" id="noResult">😔 कुनै जानकारी भेटिएन। कृपया अर्को शब्दले खोज्नुहोस्।</p>
+    <!-- ============ ७. चाडपर्व (Festival) - नयाँ थपिएको ============ -->
+    <section class="category" id="festival">
+      <div class="category-head" onclick="toggleAccordion('festival')">
+        <h2>🎉 चाडपर्व (Festival)</h2>
+        <span class="arrow-icon" id="arrow-festival">▼</span>
+      </div>
+      <div class="category-body" id="body-festival">
+        <p class="category-desc">नेपाली चाडपर्व, तिहार, दशैं, छठ, ल्होसार लगायतका सांस्कृतिक र धार्मिक पर्वहरूको जानकारी।</p>
+        <div class="card-grid" id="grid-festival"></div>
+      </div>
+    </section>
+
+    <div class="no-result" id="noResult">❌ खोजिएको जानकारी फेला परेन। कृपया अरू शब्द टाइप गर्नुहोस्।</div>
+
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-links">
-        <a onclick="showCategory('krishi')">कृषि</a>
-        <a onclick="showCategory('travel')">यात्रा</a>
-        <a onclick="showCategory('wildlife')">वन्यजन्तु</a>
-        <a onclick="showCategory('river-lake')">नदी र ताल</a>
-        <a onclick="showCategory('village-city')">गाउँ र सहर</a>
-        <a onclick="showCategory('kitchen')">भान्सा</a>
-      </div>
-      <p>© <span id="year"></span> VillageTips — गाउँले ज्ञान र जानकारीको भण्डार।</p>
+      <p>&copy; २०२६ <a href="index.html">VillageTips</a> - सबै अधिकार सुरक्षित।</p>
     </div>
   </footer>
 
+  <!-- ===================== JAVASCRIPT ===================== -->
   <script>
-    // =========================================================
-    // १. तपाईंले यहाँ आफ्ना सबै फाइलहरूको जानकारी राख्ने
-    // =========================================================
-    const siteData = [
-      // --- कृषि जानकारी (Agriculture) ---
-      { category: "krishi", title: "मकै खेती", file: "makai-kheti.html", icon: "🌽", desc: "मकै रोप्ने समय, बीउ छनोट, मलजल र रोग नियन्त्रणको तरिका।", keywords: "makai maize corn kheti" },
-      { category: "krishi", title: "धान खेती", file: "dhan-kheti.html", icon: "🌾", desc: "रोपाइँ, सिँचाइ र धान बालीमा लाग्ने कीराको रोकथाम।", keywords: "dhan rice kheti" },
-      
-      // --- यात्रा र पर्यटन (Travel and Tour) ---
-      { category: "travel", title: "नुनथर पर्यटकीय र धार्मिक स्थल", file: "nunthar-tourist-and-religious-place.html", icon: "🛕", desc: "रौतहटको प्रसिद्ध धार्मिक, ऐतिहासिक र पर्यटकीय स्थल नुनथरको जानकारी।", keywords: "nunthar rautahat travel tour mandir" },
-      { category: "travel", title: "पोखरा यात्रा", file: "pokhara-yatra.html", icon: "⛵", desc: "पोखरा घुम्ने स्थान, पुग्ने मार्ग र राम्रो समय।", keywords: "pokhara travel tour yatra" },
+    // १. ब्लग डेटा (यहाँ तपाईंको सबै फाइलहरूको जानकारी छ)
+    const blogData = [
+      // --- चाडपर्व (Festival) ---
+      { category: "festival", title: "गोरु तिहार", file: "goru-tihar.html", icon: "🐂", desc: "खेत जोत्ने गोरु र हली (किसान) को पूजा गरिने दिन, इतिहास र मनाउने तरिका।", keywords: "goru tihar ox festival hali govardhan puja nepal" },
+      { category: "festival", title: "गाई तिहार", file: "gai-tihar.html", icon: "🐄", desc: "नेपाली समाजमा लक्ष्मीको प्रतीक मानेर गाई पूजा गरिने ऐतिहासिक दिन र यसको विधि।", keywords: "gai tihar cow festival laxmi puja deusi bhailo nepal" },
+      { category: "festival", title: "छठ पर्व", file: "chhat.html", icon: "☀️", desc: "आस्था, शुद्धता र सामाजिक सद्भावको महापर्व छठ, यसको इतिहास र चार दिनको कठिन विधि।", keywords: "chhath parva sun worship terai culture madhesh festival nepal" },
 
-      // --- वन्यजन्तु र जंगल सफारी (Wildlife and Jungle Safari) ---
-      { category: "wildlife", title: "कालो खपटे किरो", file: "darkling-beetle.html", icon: "🕷️", desc: "कालो खपटे किरो वा darkling beetle", keywords: "darkling beetle information" },
-      { category: "wildlife", title: "हात्ती", file: "hatti-jankari.html", icon: "🐘", desc: "हात्तीको बासस्थान र मानव-हात्ती द्वन्द्व व्यवस्थापन।", keywords: "hatti elephant wildlife jungle safari" },
+      // --- कृषि जानकारी (Agriculture) ---
+      { category: "krishi", title: "मकै खेती", file: "makai-kheti.html", icon: "🌽", desc: "मकै रोप्ने समय, बीउ छनोट, मलजल र रोग नियन्त्रणको तरिका।", keywords: "makai maize corn kheti nepal" },
+
+      // --- यात्रा र पर्यटन (Travel and Tour) ---
+      { category: "travel", title: "नुनथर क्षेत्र", file: "nunthar-tourist-and-religious-place.html", icon: "🛕", desc: "रौतहटको प्रसिद्ध धार्मिक, ऐतिहासिक र पर्यटकीय स्थल नुनथरको जानकारी।", keywords: "nunthar rautahat travel tour mandir" },
+
+      // --- वन्यजन्तु (Wildlife) ---
+      { category: "wildlife", title: "खपटे किरा", file: "darkling-beetle.html", icon: "🐞", desc: "घरमा पस्ने खपटे किराको जीवन चक्र र यसलाई भगाउने उपाय।", keywords: "darkling beetle kira wildlife" },
 
       // --- नदी र ताल (Lake and River) ---
       { category: "river-lake", title: "फेवा ताल", file: "phewa-tal.html", icon: "🛶", desc: "पोखराको प्रसिद्ध ताल, वरपरका पर्यटकीय गन्तव्य र गतिविधि।", keywords: "phewa lake pokhara tal" },
 
-      // --- गाउँ र सहर (Village and City) ---
-      { category: "village-city", title: "धनतेरस", file: "dhanteras.html", icon: "🌄", desc: "धनतेरस पर्व कसरी मनाइन्छ? धन्वन्तरी जयन्ती र यसको धार्मिक महत्वको।", keywords: "dhanteras dhanwantari jayanti tihar festival nepal" },
-      { category: "village-city", title: "काग तिहार", file: "kag-tihar.html", icon: "🐦", desc: "तिहारको पहिलो दिन, यमराजको दूत मानिने कागको पूजा र यसको महत्व।", keywords: "kag tihar crow tihar festival nepal" },
-      { category: "village-city", title: "कुकुर तिहार", file: "kukur-tihar.html", icon: "🐕", desc: "तिहारको दोस्रो दिन, कुकुरको महत्व, इतिहास र पूजा गर्ने तरिका।", keywords: "kukur tihar dog festival nepal" },
-        { category: "village-city", title: "लक्ष्मीपूजा", file: "lakshmi-puja.html", icon: "🌻🌺", desc: "तिहारको तेस्रो दिन, धनकी देवी लक्ष्मीको पूजा गर्ने तरिका र महत्व।", keywords: "lakshmi puja laxmi deepawali tihar nepal" },
-{ category: "village-city", title: "छट पर्व जानकारी", file: "chhat-parba.html", icon: "🌻🌺", desc: "आस्था, शुद्धता र सामाजिक सद्भावको महापर्व छठ, यसको इतिहास र चार दिनको कठिन विधि।", keywords: "chhath parva sun worship terai culture madhesh festival nepal" },
-
       // --- भान्सा सुझाव (Kitchen Tips) ---
-      { category: "kitchen", title: "मसला भण्डारण", file: "masala-bhandaran.html", icon: "🧂", desc: "मसला लामो समय ताजा र स्वादिलो राख्ने तरिका।", keywords: "masala spice storage kitchen" }
+      { category: "kitchen", title: "मसला भण्डारण", file: "masala-bhandaran.html", icon: "🧂", desc: "मसला लामो समय ताजा र स्वादिलो राख्ने तरिका।", keywords: "masala spice storage kitchen" },
+      
+      // --- गाउँ र सहर (Village and City) ---
+      // नयाँ थपिएको: तपाईंको अघिल्लो कुराकानी अनुसार एउटा नमुना पोस्ट राखिएको छ, ताकि यो क्याटेगरी देखियोस्।
+      { category: "village-city", title: "चाबहिल स्तुपा", file: "chabahil-stupa.html", icon: "🏛️", desc: "काठमाडौंको चाबहिलमा रहेको ऐतिहासिक चारुमती स्तुपाको जानकारी।", keywords: "chabahil stupa kathmandu charumati" }
     ];
 
-    // =========================================================
-    // २. क्याटेगरी लुकाउने र देखाउने फंक्शन (Tab Logic)
-    // =========================================================
-    function showCategory(categoryId) {
-      // सबै सेक्सन लुकाउने
-      document.querySelectorAll('.category').forEach(section => {
-        section.classList.remove('active');
-      });
-
-      // मेनुको 'active' क्लास हटाउने
-      document.querySelectorAll('.nav-list a').forEach(link => {
-        link.classList.remove('active');
-      });
-
-      // यदि 'all' क्लिक गरेको छ भने सबै देखाउने
-      if (categoryId === 'all') {
-        document.querySelectorAll('.category').forEach(section => {
-          section.classList.add('active');
-        });
-        document.querySelector('.nav-list a').classList.add('active'); // 'सबै' बटनलाई एक्टिभ बनाउने
-      } else {
-        // क्लिक गरेको सेक्सन मात्र देखाउने
-        const targetSection = document.getElementById(categoryId);
-        if (targetSection) {
-          targetSection.classList.add('active');
-        }
-      }
-
-      // सर्च बक्स खाली गर्ने (ताकि पुरानो सर्चले असर नगरोस्)
-      document.getElementById('searchInput').value = '';
-      document.querySelectorAll('.card').forEach(c => c.style.display = '');
-      
-      // पेज माथि स्क्रोल गर्ने
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // =========================================================
-    // ३. स्क्रिप्टले आफैंले कार्डहरू बनाउने कोड
-    // =========================================================
+    // २. कार्डहरू बनाउने फंक्शन
     function renderCards() {
       document.querySelectorAll('.card-grid').forEach(grid => grid.innerHTML = '');
 
-      siteData.forEach(item => {
+      blogData.forEach(item => {
         const grid = document.getElementById(`grid-${item.category}`);
         if (grid) {
           const cardHTML = `
@@ -251,34 +270,41 @@
           grid.innerHTML += cardHTML;
         }
       });
+
+      // जुन क्याटेगरीमा एउटै पोस्ट छैन, त्यो हेडिङ पूरै लुकाउने
+      document.querySelectorAll('.category').forEach(section => {
+        const grid = section.querySelector('.card-grid');
+        if (grid && grid.children.length === 0) {
+          section.style.display = 'none'; 
+        } else {
+          section.style.display = 'block';
+        }
+      });
     }
 
-    // =========================================================
-    // ४. सर्च र मेनुको कोड
-    // =========================================================
+    // ३. एकोर्डियन (Accordion) खोल्ने र बन्द गर्ने फंक्शन
+    function toggleAccordion(categoryId) {
+      const body = document.getElementById(`body-${categoryId}`);
+      const arrow = document.getElementById(`arrow-${categoryId}`);
+      
+      if (body.classList.contains('active')) {
+        body.classList.remove('active');
+        arrow.classList.remove('open');
+      } else {
+        body.classList.add('active');
+        arrow.classList.add('open');
+      }
+    }
+
+    // ४. सर्च गर्ने र पेज लोड हुँदाको काम
     document.addEventListener("DOMContentLoaded", () => {
       renderCards();
-      document.getElementById('year').textContent = new Date().getFullYear();
-      
-      // सुरुमा सबै देखाउनको लागि
-      showCategory('all');
 
-      const menuToggle = document.getElementById('menuToggle');
-      const navList = document.getElementById('navList');
-      menuToggle.addEventListener('click', () => navList.classList.toggle('open'));
-
-      // सर्च गर्दा सबै सेक्सन एक्टिभ गरेर सर्च गर्ने
       const searchInput = document.getElementById('searchInput');
       const noResult = document.getElementById('noResult');
 
       searchInput.addEventListener('input', () => {
         const query = searchInput.value.trim().toLowerCase();
-        
-        // सर्च गर्दा सबै सेक्सन एक्टिभ गर्ने
-        document.querySelectorAll('.category').forEach(section => {
-          section.classList.add('active');
-        });
-
         let totalVisible = 0;
 
         const cards = document.querySelectorAll('.card');
@@ -289,12 +315,24 @@
           if (matches) totalVisible++;
         });
 
+        // सर्च गर्दा मिल्ने क्याटेगरीलाई आफैं खोल्ने र नमिल्ने लुकाउने
         document.querySelectorAll('.category').forEach(section => {
           const hasVisible = Array.from(section.querySelectorAll('.card')).some(c => c.style.display !== 'none');
+          const body = section.querySelector('.category-body');
+          const arrow = section.querySelector('.arrow-icon');
+          
           if (query !== '') {
-             section.style.display = hasVisible ? 'block' : 'none';
+             if (hasVisible) {
+               section.style.display = 'block';
+               body.classList.add('active');
+               arrow.classList.add('open');
+             } else {
+               section.style.display = 'none';
+             }
           } else {
-             section.style.display = '';
+             section.style.display = 'block';
+             body.classList.remove('active');
+             arrow.classList.remove('open');
           }
         });
 
