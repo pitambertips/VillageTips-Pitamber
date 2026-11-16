@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>तराईमा मकै खेती गर्ने तरिका</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #2E7D32; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+        h2 { color: #1b5e20; margin-top: 25px; }
+        .back-btn { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #007bff; font-weight: bold; }
+        .blog-link-container { margin-top: 40px; padding: 15px; background: #e8f5e9; border-left: 5px solid #4CAF50; border-radius: 5px; text-align: center; }
+        .btn-blog { background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← मुख्य पेजमा फर्कनुहोस्</a>
+        
+        <h1>तराईमा मकै खेती गर्ने तरिका (कार्तिक देखि मंसिर)</h1>
+        
+        <p>नेपालको तराई क्षेत्रमा कार्तिकदेखि मंसिर महिनामा लगाइने हाइब्रीड मकैले राम्रो उत्पादन दिन्छ। यहाँ मकै खेतीको पूर्ण जानकारी दिइएको छ।</p>
+
+        <h2>१. जमिनको तयारी</h2>
+        <p>खेतलाई राम्ररी २-३ पटक जोतेर मसिनो बनाउनुपर्छ। पानी जम्ने ठाउँमा ड्याङ बनाएर लगाउनुपर्छ।</p>
+
+        <h2>२. बीउ छनोट</h2>
+        <p>हाइब्रीड जातहरू जस्तै: रामपुर हाइब्रीड-१०, श्रेष्ठ, राजकुमार आदि उपयुक्त हुन्छन्। प्रति बिघा ८-१० के.जी. बीउ चाहिन्छ।</p>
+
+        <h2>३. मल व्यवस्थापन</h2>
+        <p>रोप्ने बेलामा DAP ५० के.जी. र पोटास ३० के.जी. हाल्नुहोला। युरिया ८० के.जी. लाई दुई भागमा बाँडेर रोपेको १ महिना र २ महिनामा हाल्नुहोला।</p>
+
+        <h2>४. सिँचाइ र कटाई</h2>
+        <p>मकै झुप्पा लाग्ने र घोगा आउने बेला सिँचाइ गर्नुपर्छ। करिब १२०-१५० दिनमा मकै पाक्छ र दाना कडा भएपछि टिप्नुपर्छ।</p>
+
+        <!-- ब्लगको पोस्ट लिङ्क राख्ने स्क्रिप्ट यहाँ छ -->
+        <div id="blog-link-area"></div>
+    </div>
+
+    <script>
+        // यहाँ तपाईंले आफ्नो ब्लगर पोस्टको लिङ्क राख्नुहोला
+        var blogPostUrl = "यहाँ_तपाईंको_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्"; 
+        var blogTitle = "तराईमा मकै खेती गर्ने पूरा तरिका (ब्लगमा पढ्नुहोस्)";
+
+        if(blogPostUrl !== "यहाँ_तपाईंको_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्") {
+            var linkHTML = `
+                <div class="blog-link-container">
+                    <h3>थप जानकारीको लागि:</h3>
+                    <p>यस विषयमा विस्तृत रूपमा लेखिएको हाम्रो ब्लग पोस्ट पढ्न तलको बटनमा क्लिक गर्नुहोस्।</p>
+                    <a href="${blogPostUrl}" target="_blank" class="btn-blog">📖 ${blogTitle}</a>
+                </div>
+            `;
+            document.getElementById("blog-link-area").innerHTML = linkHTML;
+        }
+    </script>
+</body>
+</html>
