@@ -40,20 +40,16 @@
     </div>
 
     <script>
-        // यहाँ तपाईंले आफ्नो ब्लगर पोस्टको लिङ्क राख्नुहोला
-        var blogPostUrl = "यहाँ_तपाईंको_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्"; 
-        var blogTitle = "तराईमा मकै खेती गर्ने पूरा तरिका (ब्लगमा पढ्नुहोस्)";
-
-        if(blogPostUrl !== "यहाँ_तपाईंको_ब्लगर_पोस्टको_लिङ्क_राख्नुहोस्") {
-            var linkHTML = `
-                <div class="blog-link-container">
-                    <h3>थप जानकारीको लागि:</h3>
-                    <p>यस विषयमा विस्तृत रूपमा लेखिएको हाम्रो ब्लग पोस्ट पढ्न तलको बटनमा क्लिक गर्नुहोस्।</p>
-                    <a href="${https://villagetipspitamber.blogspot.com/2026/11/akai-kheti-tarai-nepal.html.html?m=1}" target="_blank" class="btn-blog">📖 ${blogTitle}</a>
-                </div>
-            `;
-            document.getElementById("blog-link-area").innerHTML = linkHTML;
-        }
+     <!-- यो भाग ब्लगरको लिङ्कको लागि हो -->
+<div style="margin-top: 40px; padding: 20px; background-color: #e8f5e9; border-left: 5px solid #4CAF50; border-radius: 8px; text-align: center;">
+    <h3 style="color: #2E7D32; margin-top: 0;">थप जानकारीको लागि:</h3>
+    <p>यस विषयमा विस्तृत रूपमा लेखिएको हाम्रो ब्लग पोस्ट पढ्न तलको बटनमा क्लिक गर्नुहोस्।</p>
+    
+    <!-- यहाँ तपाईंको ब्लगरको सही लिङ्क राख्नुहोला -->
+    <a href="https://villagetipspitamber.blogspot.com/2026/11/akai-kheti-tarai-nepal.html.html?m=1" target="_blank" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
+        📖 ब्लगमा पूरा पढ्नुहोस्
+    </a>
+</div>
     </script>
 </body>
 </html>
